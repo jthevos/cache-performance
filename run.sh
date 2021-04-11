@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
 make
-./cache-access
+./no_cache_access

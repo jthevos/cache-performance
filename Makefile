@@ -1,6 +1,8 @@
 
 all: cache-access.c
-	gcc cache-access.c -o cache-access
+	gcc no_cache_access.c -o no_cache_access
+	#gcc cache_access.c -o cache_access
 
 clean:
-	rm cache-access
+	rm no_cache_access
+	#rm cache_access

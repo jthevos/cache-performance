@@ -61,15 +61,14 @@ int main() {
     //printf("%lu", array_size);
     populate_array(byte_array, array_size);
 
-    printf("timing start\n");
     clock_t initial_time = clock();
     access_array_randomly(byte_array, array_size, 1000000);
 
     clock_t final_time = clock();
     double time_diff = 1000 * ((double) final_time - initial_time)/ CLOCKS_PER_SEC;
 
-    printf("%f\n", time_diff);
-    printf("timing end\n");
+    printf("%f,\n", time_diff);
+
     free(byte_array);
 
     return 0;

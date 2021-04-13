@@ -74,7 +74,7 @@ int main() {
         printf("%lu,", array_size);
         printf("%lu,\n", dont_forget_me_plz);
 
-        sleep(1);
+        sleep(0.1);
 
 
     }

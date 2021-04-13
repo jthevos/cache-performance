@@ -38,6 +38,7 @@ void access_array_randomly(int* array, long array_size, int loop_count) {
 
 // populate all indicies with a random value
 void populate_array(int* array, long array_size) {
+    printf("populate_array array param = %p\n", array);
     for (int i = 0; i < array_size; i+=sizeof(int)) {
         int temp = simplerand();
         array[i] = temp;
@@ -52,11 +53,11 @@ int main() {
     7 * 2 << 27 is used
     */
     long array_size = 8;
-    int step = 64;
+    int step = sizeof(int);
 
     printf("%s\n", "Am I alive?");
-    for (int i = step; i < 64*11; i+=step) {
-        array_size += step;
+    for (int i = step; i < 2<<20; i*=2) {
+        array_size = i;
         printf("array_size = %lu,\n", array_size);
         // byte_array = realloc(byte_array, array_size);
         int* byte_array = (int*)malloc(array_size);
@@ -66,14 +67,16 @@ int main() {
         clock_t initial_time = clock();
         access_array_randomly(byte_array, array_size, 1000000);
         clock_t final_time = clock();
-
+        free(byte_array);
         double time_diff = 1000 * ((double) final_time - initial_time)/ CLOCKS_PER_SEC;
 
         printf("%f,", time_diff);
         printf("%lu,", array_size);
         printf("%lu,\n", dont_forget_me_plz);
 
-        free(byte_array);
+        sleep(1);
+
+
     }
 
     return 0;

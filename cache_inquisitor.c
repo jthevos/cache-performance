@@ -41,8 +41,8 @@ void populate_array(int* array, long array_size) {
     printf("populate_array array param = %p\n", array);
     for (int i = 0; i < array_size; i+=sizeof(int)) {
         //int temp = 42;
-        printf("index = %d,", i);
-        array[i] = 42;
+        // printf("index = %d,", i);
+        array[i] = i;
 
     }
     printf("\n");
@@ -57,13 +57,16 @@ int main() {
     */
     long array_size = 8;
     int step = sizeof(int);
+    // int* byte_array = (int*)malloc(array_size);
 
     printf("%s\n", "Am I alive?");
-    for (int i = step; i < 2<<20; i*=2) {
+    for (int i = step; i < (sizeof(int)<<22); i*=step) {
         array_size = i;
         printf("array_size = %lu,\n", array_size);
+        printf("i: %d\n", i);
+        printf("stuff: %d\n", sizeof(int)<<20);
         // byte_array = realloc(byte_array, array_size);
-        int* byte_array = (int*)malloc(array_size);
+        int* byte_array = (int*)malloc(sizeof(int) * array_size);
         printf("byte_array = %p,\n", byte_array);
         populate_array(byte_array, array_size);
         printf("%s,\n", "*****************");
@@ -77,10 +80,10 @@ int main() {
         printf("%lu,", array_size);
         printf("%lu,\n", dont_forget_me_plz);
 
-        sleep(1);
-
-
+        // sleep(1);
     }
+
+    // free(byte_array);
 
     return 0;
 }

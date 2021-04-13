@@ -29,21 +29,16 @@ long custom_random(int min, int max) {
 void access_array_randomly(int* array, long array_size, int loop_count) {
     for (int i = 0; i < loop_count; i++) {
         int target_index = custom_random(0, array_size);
-        dont_forget_me_plz += array[target_index];
-    }
-}
 
-void access_cached_value(int* array, long array_size, int loop_count) {
-    for (int i = 0; i < loop_count; i++) {
-        int target_index = custom_random(0, array_size);
-        int x = array[target_index];  // trivial assignment
-        //printf("%d, %d\n", array[target_index], target_index);
+        if (target_index % 8 == 0) {
+            dont_forget_me_plz = array[target_index] % 2;
+        }
     }
 }
 
 // populate all indicies with a random value
 void populate_array(int* array, long array_size) {
-    for (int i = 0; i < array_size; ++i) {
+    for (int i = 0; i < array_size; i+=sizeof(int)) {
         int temp = simplerand();
         array[i] = temp;
     }
@@ -56,13 +51,16 @@ int main() {
     multiply by 8 to get 8 gigs. We will get an overflow. Thus,
     7 * 2 << 27 is used
     */
-    int array_size = 8;
-    int* byte_array = (int*)malloc(array_size);
-    int step = sizeof(int*)*8;
+    long array_size = 8;
+    int step = 64;
 
-    for (int i = step; i < 100000000; i+=step) {
-        array_size = sizeof(int*) * i;
-        byte_array = realloc(byte_array, i);
+    printf("%s\n", "Am I alive?");
+    for (int i = step; i < 64*11; i+=step) {
+        array_size += step;
+        printf("array_size = %lu,\n", array_size);
+        // byte_array = realloc(byte_array, array_size);
+        int* byte_array = (int*)malloc(array_size);
+        printf("byte_array = %p,\n", byte_array);
         populate_array(byte_array, array_size);
 
         clock_t initial_time = clock();
@@ -72,10 +70,11 @@ int main() {
         double time_diff = 1000 * ((double) final_time - initial_time)/ CLOCKS_PER_SEC;
 
         printf("%f,", time_diff);
-        printf("%d,", array_size);
+        printf("%lu,", array_size);
         printf("%lu,\n", dont_forget_me_plz);
 
+        free(byte_array);
     }
-    free(byte_array);
+
     return 0;
 }

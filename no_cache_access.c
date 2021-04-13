@@ -6,6 +6,8 @@
 
 int x = 1, y = 4, z = 7, w = 13;
 
+long __throwaway_sum = 0;
+
 int simplerand(void) {
   int t = x;
   t ^= t << 11;
@@ -30,7 +32,13 @@ void access_array_randomly(int* array, long array_size, int loop_count) {
         // get random number between 0 and array length
         int target_index = custom_random(0, array_size);
         // trivial assignment to access the array
-        long x = array[target_index];
+        __throwaway_sum += array[target_index] * 0; // these numbers are huge,
+                                                    // accumulting them is a bad idea
+
+        // the compliler MIGHT...
+        // I didn't try hard enough to fool the compliler
+        // make an accumulator
+        // use it later on. THEN the compiler wont get rid of it.
 
         //printf("%d, %d\n", array[target_index], target_index);
     }
@@ -51,6 +59,8 @@ void populate_array(int* array, long array_size) {
     }
 }
 
+// 8GB might be too big that it actually might stop to go to pages.
+
 int main() {
 
     /*
@@ -69,13 +79,13 @@ int main() {
 
     clock_t initial_time = clock();
     access_array_randomly(byte_array, array_size, 1000000);
-
     clock_t final_time = clock();
+
     double time_diff = 1000 * ((double) final_time - initial_time)/ CLOCKS_PER_SEC;
 
     printf("%f,\n", time_diff);
+    printf("%f,\n", __throwaway_sum);  // print so compiler can't ignore it
 
     free(byte_array);
-
     return 0;
 }

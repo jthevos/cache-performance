@@ -1,8 +1,6 @@
 
-all: no_cache_access.c
-	gcc no_cache_access.c -o no_cache_access
-	gcc cache_access.c -o cache_access
+all: cache_inquisitor.c
+	gcc cache_inquisitor.c -o cache_inquisitor
 
 clean:
-	rm no_cache_access
-	rm cache_access
+	rm cache_inquisitor

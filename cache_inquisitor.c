@@ -58,8 +58,9 @@ int main() {
     */
     int array_size = 8;
     int* byte_array = (int*)malloc(array_size);
+    int step = sizeof(int)*8;
 
-    for (int i = 8; i < 100000000; i+=8) {
+    for (int i = step; i < 100000000; i+=step) {
         array_size = sizeof(int) * i;
         byte_array = realloc(byte_array, i);
         populate_array(byte_array, array_size);

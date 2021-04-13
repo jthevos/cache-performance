@@ -40,9 +40,12 @@ void access_array_randomly(int* array, long array_size, int loop_count) {
 void populate_array(int* array, long array_size) {
     printf("populate_array array param = %p\n", array);
     for (int i = 0; i < array_size; i+=sizeof(int)) {
-        int temp = simplerand();
-        array[i] = temp;
+        //int temp = 42;
+        printf("index = %d,", i);
+        array[i] = 42;
+
     }
+    printf("\n");
 }
 
 int main() {
@@ -63,7 +66,7 @@ int main() {
         int* byte_array = (int*)malloc(array_size);
         printf("byte_array = %p,\n", byte_array);
         populate_array(byte_array, array_size);
-
+        printf("%s,\n", "*****************");
         clock_t initial_time = clock();
         access_array_randomly(byte_array, array_size, 1000000);
         clock_t final_time = clock();

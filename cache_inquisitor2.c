@@ -59,7 +59,7 @@ int main() {
     long array_size = 8;
     int step = sizeof(int);
     int count = 0;
-    long pp =  (long)pow(step, 16);
+    long pp =  (long)pow(step, 10);
 
     printf("%ld\n", pp);
     // for (int i = step; i < (sizeof(int)<<28); i*=step) {

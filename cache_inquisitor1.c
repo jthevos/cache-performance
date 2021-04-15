@@ -73,7 +73,7 @@ int main() {
     // for (int i = step; i < (sizeof(int)<<28); i*=step) {
     for (long i = step; i < pp; i*=step) {
         // array_size = i;
-        // offset = i;
+        offset = i;
         count++;
         
         populate_array(byte_array, array_size);

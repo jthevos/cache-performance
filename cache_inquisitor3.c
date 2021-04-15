@@ -64,7 +64,7 @@ int main() {
         array_size = i;
         printf("array_size = %lu,\n", array_size);
         printf("i: %d\n", i);
-        printf("stuff: %d\n", sizeof(int)<<20);
+        printf("stuff: %lu\n", sizeof(int)<<20);
         // byte_array = realloc(byte_array, array_size);
         int* byte_array = (int*)malloc(sizeof(int) * array_size);
         printf("byte_array = %p,\n", byte_array);

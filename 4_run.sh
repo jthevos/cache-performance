@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
 make
-./cache_inquisitor 
+./4_cache_inquisitor 

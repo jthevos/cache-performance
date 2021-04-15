@@ -3,7 +3,8 @@
 1.  How big is a cache block?
 
 2.  How big is the cache?
-    The cache is 256Kb as determined by experimental trial.
+    The cache is 256Kb as determined by experimental trial. The time taken accessing values
+    above this threshold goes up noticeably. 
 
 3.  How long does a reference to main memory take to complete?
     We accessed a very large array 1 million times with random access indices.

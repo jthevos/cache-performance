@@ -1,9 +1,23 @@
 # cache-performance
 
 1.  How big is a cache block?
+
 2.  How big is the cache?
+    The cache is 256Kb as determined by experimental trial. The time taken accessing values
+    above this threshold goes up noticeably. 
+
 3.  How long does a reference to main memory take to complete?
+    We accessed a very large array 1 million times with random access indices.
+
+    mean      262.108155 ms / 1000000 accesses
+    median    151.941500 ms / 1000000 accesses
+    n = 200
+
 4.  How long does a reference that can be satisfied from cache take to complete?
+    We accessed an array we knew would fit into cache 1 million times
+    mean      17.941965 ms / 1000000 accesses
+    median    17.306500 ms / 1000000 accesses
+    n = 200
 
 TODO:
 1. Vary the array size. Our goal is to try to fit an array into the cache.

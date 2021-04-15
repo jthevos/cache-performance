@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <limits.h>   // for INT_MAX
 #include <time.h>     // for seeding srand, clock(),
+#include <math.h>
 
 int x = 1, y = 4, z = 7, w = 13;
 
@@ -57,30 +58,26 @@ int main() {
     */
     long array_size = 8;
     int step = sizeof(int);
-    // int* byte_array = (int*)malloc(array_size);
+    int count = 0;
+    long pp =  (long)pow(step, 16);
 
-    printf("%s\n", "Am I alive?");
-    for (int i = step; i < (sizeof(int)<<22); i*=step) {
+    printf("%ld\n", pp);
+    // for (int i = step; i < (sizeof(int)<<28); i*=step) {
+    for (long i = step; i < pp; i*=step) {
         array_size = i;
-        printf("array_size = %lu,\n", array_size);
-        printf("i: %d\n", i);
-        printf("stuff: %lu\n", sizeof(int)<<20);
-        // byte_array = realloc(byte_array, array_size);
+        count++;
         int* byte_array = (int*)malloc(sizeof(int) * array_size);
-        printf("byte_array = %p,\n", byte_array);
         populate_array(byte_array, array_size);
-        printf("%s,\n", "*****************");
         clock_t initial_time = clock();
-        access_array_randomly(byte_array, array_size, 1000000);
+        access_array_randomly(byte_array, array_size, 10000000);
         clock_t final_time = clock();
         free(byte_array);
         double time_diff = 1000 * ((double) final_time - initial_time)/ CLOCKS_PER_SEC;
 
-        printf("%f,", time_diff);
-        printf("%lu,", array_size);
+        printf("count: %d,", count);
+        printf("time diff: %f,", time_diff);
+        printf("array size: %lu,", array_size);
         printf("%lu,\n", dont_forget_me_plz);
-
-        // sleep(1);
     }
 
     // free(byte_array);

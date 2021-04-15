@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <limits.h>   // for INT_MAX
 #include <time.h>     // for seeding srand, clock(),
+#include <math.h>
 
 int x = 1, y = 4, z = 7, w = 13;
 
@@ -58,20 +59,15 @@ int main() {
     long array_size = 8;
     int step = sizeof(int);
     int count = 0;
-    // int* byte_array = (int*)malloc(array_size);
+    long pp =  (long)pow(step, 16);
 
-    printf("%s\n", "Am I alive?");
-    for (int i = step; i < (sizeof(int)<<28); i*=step) {
+    printf("%ld\n", pp);
+    // for (int i = step; i < (sizeof(int)<<28); i*=step) {
+    for (long i = step; i < pp; i*=step) {
         array_size = i;
         count++;
-        // printf("array_size = %lu,\n", array_size);
-        // printf("i: %d\n", i);
-        // printf("stuff: %lu\n", sizeof(int)<<20);
-        // byte_array = realloc(byte_array, array_size);
         int* byte_array = (int*)malloc(sizeof(int) * array_size);
-        // printf("byte_array = %p,\n", byte_array);
         populate_array(byte_array, array_size);
-        // printf("%s,\n", "*****************");
         clock_t initial_time = clock();
         access_array_randomly(byte_array, array_size, 10000000);
         clock_t final_time = clock();
